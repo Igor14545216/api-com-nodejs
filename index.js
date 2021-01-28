@@ -8,26 +8,48 @@ function obterUsuario(callback) {
     setTimeout(() => {
         return callback(null, {
             id: 1,
-            nopme: 'Batata',
+            nome: 'Batata',
             dataNascimento: new Date(),
         })
     }, 1000);
 }
 
-function obterTelefone(idUsuario) {
+function obterTelefone(idUsuario, callback) {
     setTimeout(() => {
-
-        return {
-            telefone: '0123132',
-            ddd: 111
-        }
-    }, timeout);
+        return callback(null, {
+            numero: '0123132',
+            ddd: 31
+        })
+    }, 2000);
 }
 
-//resolverUsuario só será chamado quando a function obterUsuario tiver terminado.
-obterUsuario(resolverUsuario);
-
-
-function resolverUsuario(erro, usuario) {
-    console.log("usuario", usuario);
+function obterEndereco(idUsuario, callback) {
+    setTimeout(() => {
+        return callback(null, {
+            rua: 'betula',
+            numero: 75
+        })
+    }, 3000);
 }
+
+obterUsuario(function obterUsuario(error, usuario) {
+    if (error)
+        return console.log('deu erro usuario', error);
+
+    obterTelefone(usuario.id, function obterTelefone(erro1, telefone) {
+        if (erro1)
+            return console.log('deu erro telefone', erro1);
+
+        obterEndereco(usuario.id, function obterEndereco(erro2, endereco) {
+            if (erro2) {
+                return console.log('deu erro endereco');
+            }
+
+            console.log(`
+                Nome: ${usuario.nome},
+                Endereço: ${endereco.rua}, ${endereco.numero},
+                Telefone: (${telefone.ddd}), ${telefone.numero}
+                `);
+        })
+    })
+})
