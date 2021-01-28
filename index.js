@@ -4,15 +4,13 @@
  * obter o endereço do usuário pelo ID
  */
 
-function obterUsuario() {
-
+function obterUsuario(callback) {
     setTimeout(() => {
-
-        return {
+        return callback(null, {
             id: 1,
             nopme: 'Batata',
             dataNascimento: new Date(),
-        }
+        })
     }, 1000);
 }
 
@@ -26,6 +24,10 @@ function obterTelefone(idUsuario) {
     }, timeout);
 }
 
-const usuario = obterUsuario();
-//usuario retornando undefined
-console.log(usuario);
+//resolverUsuario só será chamado quando a function obterUsuario tiver terminado.
+obterUsuario(resolverUsuario);
+
+
+function resolverUsuario(erro, usuario) {
+    console.log("usuario", usuario);
+}
