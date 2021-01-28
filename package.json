@@ -1,0 +1,20 @@
+{
+  "name": "my-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Igor14545216/api-com-nodejs.git"
+  },
+  "author": "Igor Coimbra",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Igor14545216/api-com-nodejs/issues"
+  },
+  "homepage": "https://github.com/Igor14545216/api-com-nodejs#readme"
+}
