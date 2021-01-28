@@ -1,17 +1,23 @@
 /**
- * bter um usuario
+ * obter um usuario
  * obter o numero de telefone de um usuario a partir de seu ID
  * obter o endereço do usuário pelo ID
  */
 
-function obterUsuario(callback) {
-    setTimeout(() => {
-        return callback(null, {
-            id: 1,
-            nome: 'Batata',
-            dataNascimento: new Date(),
-        })
-    }, 1000);
+function obterUsuario() {
+    // quando der algum problema => reject (ERRO)
+    // uqnado sucess => RESOLVE
+    return new Promise(function resolvePromise(resolve, reject) {
+        setTimeout(() => {
+            return reject(new Error('Deu erro.'))
+
+            return resolve({
+                id: 1,
+                nome: 'Batata',
+                dataNascimento: new Date(),
+            })
+        }, 1000);
+    })
 }
 
 function obterTelefone(idUsuario, callback) {
@@ -32,24 +38,15 @@ function obterEndereco(idUsuario, callback) {
     }, 3000);
 }
 
-obterUsuario(function obterUsuario(error, usuario) {
-    if (error)
-        return console.log('deu erro usuario', error);
+const usuarioPromise = obterUsuario()
+// para manipular sucesso, usamos o .then
+// para manipular erros, usamos o .catch
 
-    obterTelefone(usuario.id, function obterTelefone(erro1, telefone) {
-        if (erro1)
-            return console.log('deu erro telefone', erro1);
+usuarioPromise.then(function (resultado) {
+    console.log('resultado ', resultado);
 
-        obterEndereco(usuario.id, function obterEndereco(erro2, endereco) {
-            if (erro2) {
-                return console.log('deu erro endereco');
-            }
-
-            console.log(`
-                Nome: ${usuario.nome},
-                Endereço: ${endereco.rua}, ${endereco.numero},
-                Telefone: (${telefone.ddd}), ${telefone.numero}
-                `);
-        })
-    })
+}).catch(function (error) {
+    console.log(error);
 })
+
+
