@@ -7,7 +7,6 @@
 function obterUsuario() {
     return new Promise(function resolvePromise(resolve, reject) {
         setTimeout(() => {
-            // return reject(new Error('Deu erro.'))
             return resolve({
                 id: 1,
                 nome: 'Batata',
